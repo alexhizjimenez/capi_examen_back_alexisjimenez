@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use App\Models\UserDomicilio;
+use Database\Factories\UserDomicilioFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $users = User::factory(100)->create();
+        foreach ($users as  $user) {
+            UserDomicilio::factory()->create([
+                'user_id' => $user->id
+            ]);
+        }
     }
 }
